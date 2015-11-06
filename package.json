@@ -1,0 +1,28 @@
+{
+  "name": "malachi",
+  "version": "0.1.0",
+  "description": "Tiny event dispatcher factory for javascript DDD applications",
+  "main": "malachi.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasvanlankveld/malachi.git"
+  },
+  "keywords": [
+    "domain",
+    "event",
+    "dispatcher",
+    "javascript"
+  ],
+  "author": "Thomas van Lankveld",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thomasvanlankveld/malachi/issues"
+  },
+  "homepage": "https://github.com/thomasvanlankveld/malachi#readme",
+  "devDependencies": {
+    "jasmine": "^2.3.2"
+  }
+}
