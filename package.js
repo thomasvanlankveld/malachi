@@ -8,17 +8,15 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use([
-    'ecmascript',
-    'underscore'
-  ]);
+  api.use('ecmascript');
   api.addFiles('malachi.js');
   api.export('malachi');
 });
 
-//Package.onTest(function(api) {
-//  api.use('ecmascript');
-//  api.use('tinytest');
-//  api.use('thomasvanlankveld:malachi');
-//  api.addFiles('malachi-tests.js');
-//});
+Package.onTest(function(api) {
+  api.use([
+    'ecmascript',
+    'sanjo:jasmine@0.20.2',
+    'thomasvanlankveld:malachi'
+  ]);
+});
