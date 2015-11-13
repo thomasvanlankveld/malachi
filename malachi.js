@@ -6,7 +6,7 @@
  * project, it may be useful in case there are multiple bounded contexts
  * within the same project.
  *
- * @returns {malachi} The dispatcher factory
+ * @returns {function} The dispatcher factory
  */
 malachi = (function(_){
 
@@ -20,7 +20,7 @@ malachi = (function(_){
     if(typeof signature !== "function") {
       throw new TypeError("Event signature must be a function");
     }
-    var name = signature.toString();
+    let name = signature.toString();
     name = name.substr('function '.length);
     name = name.substr(0, name.indexOf('('));
     if(name === "") {
@@ -41,7 +41,7 @@ malachi = (function(_){
      *
      * @type {object}
      */
-    var handlers = {};
+    const handlers = {};
 
     return {
 
@@ -74,10 +74,10 @@ malachi = (function(_){
        * @param event
        */
       fire(signature, event) {
-        var type = nameOf(signature);
-        _.each(handlers[type], function(handler) {
+        const type = nameOf(signature);
+        for (const handler of handlers[type]) {
           handler(event);
-        });
+        }
       }
     };
   }
