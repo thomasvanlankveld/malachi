@@ -4,7 +4,7 @@
   "description": "Tiny event dispatcher factory for javascript DDD applications",
   "main": "malachi.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
