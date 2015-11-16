@@ -1,4 +1,3 @@
-
 /**
  * Event dispatcher factory
  *
@@ -8,7 +7,7 @@
  *
  * @returns {function} The dispatcher factory
  */
-malachi = (function(_){
+malachi = (function(){
 
   /**
    * Get the name of an event signature
@@ -81,4 +80,4 @@ malachi = (function(_){
       }
     };
   }
-}(_));
+}());

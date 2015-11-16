@@ -8,15 +8,22 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('ecmascript');
+  api.use('ecmascript@0.1.5');
   api.addFiles('malachi.js');
   api.export('malachi');
 });
 
 Package.onTest(function(api) {
+
+  /**
+   * Both
+   */
   api.use([
-    'ecmascript',
+    'ecmascript@0.1.5',
     'sanjo:jasmine@0.20.2',
     'thomasvanlankveld:malachi'
-  ]);
+  ], ['client', 'server']);
+  api.addFiles([
+    'tests/both/malachi-spec.js'
+  ], ['client', 'server']);
 });
