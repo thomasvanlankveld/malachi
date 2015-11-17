@@ -12,6 +12,44 @@ describe('Malachi', () => {
 
   describe('dispatcher', () => {
 
+    it('should only expose the properties "fire" and "on"', () => {
+      const keys = [];
+      for (const key in dispatcher) keys.push(key);
+
+      expect(keys).toContain('fire');
+      expect(keys).toContain('on');
+      expect(keys.length).toBe(2);
+    });
+
+    it('after registering, should still only expose the properties "fire" and "on"', () => {
+      function signature() {}
+      function handler() {}
+
+      dispatcher.on(signature, handler);
+
+      const keys = [];
+      for (const key in dispatcher) keys.push(key);
+
+      expect(keys).toContain('fire');
+      expect(keys).toContain('on');
+      expect(keys.length).toBe(2);
+    });
+
+    it('after firing, should still only expose the properties "fire" and "on"', () => {
+      function signature() {}
+      function handler() {}
+
+      dispatcher.on(signature, handler);
+      dispatcher.fire(signature, {});
+
+      const keys = [];
+      for (const key in dispatcher) keys.push(key);
+
+      expect(keys).toContain('fire');
+      expect(keys).toContain('on');
+      expect(keys.length).toBe(2);
+    });
+
     describe('on()', () => {
 
       it('should throw an error if the first argument is not a function', () => {
@@ -80,6 +118,15 @@ describe('Malachi', () => {
         dispatcher.on(signatures.first, handlers.first);
         dispatcher.on(signatures.second, handlers.second);
         dispatcher.on(signatures.second, handlers.third);
+      });
+
+      it('should return the dispatcher instance (for chaining)', () => {
+        function signature() {}
+        function handler() {}
+
+        const returned = dispatcher.on(signature, handler);
+
+        expect(returned).toBe(dispatcher);
       });
 
     });
@@ -215,44 +262,6 @@ describe('Malachi', () => {
         expect(handlers.third).toHaveBeenCalledWith(event);
       });
 
-    });
-
-    it('should only expose the properties "fire" and "on"', () => {
-      const keys = [];
-      for (const key in dispatcher) keys.push(key);
-
-      expect(keys).toContain('fire');
-      expect(keys).toContain('on');
-      expect(keys.length).toBe(2);
-    });
-
-    it('after registering, should still only expose the properties "fire" and "on"', () => {
-      function signature() {}
-      function handler() {}
-
-      dispatcher.on(signature, handler);
-
-      const keys = [];
-      for (const key in dispatcher) keys.push(key);
-
-      expect(keys).toContain('fire');
-      expect(keys).toContain('on');
-      expect(keys.length).toBe(2);
-    });
-
-    it('after firing, should still only expose the properties "fire" and "on"', () => {
-      function signature() {}
-      function handler() {}
-
-      dispatcher.on(signature, handler);
-      dispatcher.fire(signature, {});
-
-      const keys = [];
-      for (const key in dispatcher) keys.push(key);
-
-      expect(keys).toContain('fire');
-      expect(keys).toContain('on');
-      expect(keys.length).toBe(2);
     });
 
   });
