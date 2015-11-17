@@ -262,7 +262,26 @@ describe('Malachi', () => {
         expect(handlers.third).toHaveBeenCalledWith(event);
       });
 
-    });
+      it('should not accept more than two arguments', () => {
+        function signature() {}
+        function handler() {}
 
+        dispatcher.on(signature, handler);
+
+        const callWithThreeArguments = () => {
+          dispatcher.fire(signature, {}, {});
+        };
+        const callWithFourArguments = () => {
+          dispatcher.fire(signature, {}, {}, {});
+        };
+        const callWithFiveArguments = () => {
+          dispatcher.fire(signature, {}, {}, {}, {});
+        };
+
+        expect(callWithThreeArguments).toThrow();
+        expect(callWithFourArguments).toThrow();
+        expect(callWithFiveArguments).toThrow();
+      });
+    });
   });
 });
