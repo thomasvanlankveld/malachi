@@ -1,4 +1,3 @@
-
 /**
  * Event dispatcher factory
  *
@@ -6,9 +5,9 @@
  * project, it may be useful in case there are multiple bounded contexts
  * within the same project.
  *
- * @returns {malachi} The dispatcher factory
+ * @returns {function} The dispatcher factory
  */
-malachi = (function(_){
+malachi = (function(){
 
   /**
    * Get the name of an event signature
@@ -17,15 +16,19 @@ malachi = (function(_){
    * @returns {string}
    */
   function nameOf(signature) {
+
     if(typeof signature !== "function") {
       throw new TypeError("Event signature must be a function");
     }
-    var name = signature.toString();
+
+    let name = signature.toString();
     name = name.substr('function '.length);
     name = name.substr(0, name.indexOf('('));
+
     if(name === "") {
       throw new Error("Event signature must be a named function");
     }
+
     return name;
   }
 
@@ -41,7 +44,7 @@ malachi = (function(_){
      *
      * @type {object}
      */
-    var handlers = {};
+    const handlers = {};
 
     return {
 
@@ -51,16 +54,23 @@ malachi = (function(_){
        * Multiple handlers can be registered to the same signature. Returns
        * the dispatcher instance for chaining.
        *
-       * @param signature
-       * @param handler
+       * @param signature {function}
+       * @param handler {function}
        * @returns {object}
        */
       on(signature, handler) {
         type = nameOf(signature);
+
+        if(typeof handler !== "function") {
+          throw new TypeError("Event handler must be a function");
+        }
+
         if(typeof handlers[type] === "undefined") {
           handlers[type] = [];
         }
+
         handlers[type].push(handler);
+
         return this;
       },
 
@@ -74,11 +84,16 @@ malachi = (function(_){
        * @param event
        */
       fire(signature, event) {
-        var type = nameOf(signature);
-        _.each(handlers[type], function(handler) {
+        const type = nameOf(signature);
+
+        if (typeof handlers[type] === "undefined") {
+          throw new ReferenceError(`No handlers registered for ${type}`);
+        }
+
+        for (const handler of handlers[type]) {
           handler(event);
-        });
+        }
       }
     };
   }
-}(_));
+}());
