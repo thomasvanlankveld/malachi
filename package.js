@@ -19,7 +19,7 @@ Package.onTest(function(api) {
    * Both
    */
   api.use([
-    'ecmascript@0.1.5',
+    'ecmascript',
     'sanjo:jasmine@0.20.2',
     'thomasvanlankveld:malachi'
   ], ['client', 'server']);
