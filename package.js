@@ -1,6 +1,6 @@
 Package.describe({
   name: 'thomasvanlankveld:malachi',
-  version: '0.1.2',
+  version: '0.1.2_2',
   summary: 'Tiny event dispatcher factory for JavaScript DDD applications',
   git: 'https://github.com/thomasvanlankveld/malachi',
   documentation: 'README.md'

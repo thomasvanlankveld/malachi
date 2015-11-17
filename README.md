@@ -21,13 +21,13 @@ Install
 Usage
 -----
 
-#### CQRS
+### CQRS
 
 The image below shows an architectural separation [proposed by Greg Young](https://youtu.be/whCk1Q87_ZI?t=5h18m9s). This architectural style has several business advantages.
 
 ![CQRS Magic triangle](https://cqrs.files.wordpress.com/2010/11/image34.png)
 
-#### Event dispatcher
+### Event dispatcher
 
 Malachi is an event dispatcher factory, designed to provide a clear boundary between the *domain* and the *read model*.
 
@@ -37,7 +37,7 @@ Applications will generally only need one dispatcher.
 const dispatcher = malachi();
 ```
 
-#### Event signatures
+### Event signatures
 
 Using Malachi, the event boundary is described using event signatures.
 
@@ -49,7 +49,7 @@ function inventoryItemDisabled({itemId, userId}) {
 
 Unlike other event dispatchers, Malachi forces these signatures to be declared as named functions. This allows intelligent editor to autocomplete their names and hint their properties. :D
 
-#### Domain
+### Domain
 
 The *domain* developers will just call the event signatures directly.
 
@@ -86,7 +86,7 @@ const inventoryItem = function({_id, enabled}) {
 
 The domain does not even need to know the dispatcher exists.
 
-#### Read model
+### Read model
 
 The *read model* developers register their handlers.
 
