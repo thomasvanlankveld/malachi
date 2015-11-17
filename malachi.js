@@ -90,6 +90,10 @@ malachi = (function(){
           throw new ReferenceError(`No handlers registered for ${type}`);
         }
 
+        if (arguments.length > 2) {
+          throw new Error('Event data should be passed as a single object');
+        }
+
         for (const handler of handlers[type]) {
           handler(event);
         }
