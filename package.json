@@ -1,10 +1,10 @@
 {
   "name": "malachi",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Tiny event dispatcher factory for javascript DDD applications",
   "main": "malachi.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
